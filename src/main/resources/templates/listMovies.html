@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Movie Ticket Order page - Welcome and choose a Movie</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Movie Ticket Shop App</h1>
+</header>
+<main>
+    <form th:method="post" th:action="@{/filter}">
+        <h2>Choose filters:</h2>
+        <label>Includes this text:</label>
+        <input type="text" name="textFilter">
+        <label>Rating of at least:</label>
+        <input type="number" name="ratingFilter" min="0.0" max="5.0" step="0.1">
+        <input type="submit" value="Submit" >
+    </form>
+
+    <form th:method="post" th:action="@{/}">
+    <h2>Choose movie:</h2>
+    <ul th:each="movie : ${movies}">
+        <input type="radio" name="radio" th:value="${movie.getTitle()}" th:text="'Title: '+ ${movie.getTitle()} + ', Summary: ' + ${movie.getSummary()} + ', Rating: ' +${movie.getRating()} ">
+    </ul>
+    <h2>Choose number of tickets:</h2>
+    <input type="number" name="numTickets" min="1" max="10"><br/>
+    <br/>
+        <input type="submit" value="Submit" >
+    </form>
+</main>
+</body>
+</html>
