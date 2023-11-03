@@ -41,7 +41,11 @@ public class MovieRepository {
         }
     }
     public Movie mostBoughtMovie(){
-        return DataHolder.movies
+        Movie movie =  DataHolder.movies
                 .stream().max(Comparator.comparing(Movie::getTicketsBought)).get();
+        if (movie.getTicketsBought() == 0){
+            return new Movie("No movies bought", "", 0, 0);
+        }
+        return movie;
     }
 }
