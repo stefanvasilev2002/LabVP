@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.TicketOrder;
 import mk.finki.ukim.mk.lab.service.TicketOrderService;
 import org.thymeleaf.context.WebContext;
@@ -37,6 +38,8 @@ public class MovieListServlet extends HttpServlet {
         WebContext context = new WebContext(webExchange);
 
         context.setVariable("movies", movieService.listAll());
+        Movie mostBoughtMovie =  movieService.mostBoughtMovie();
+        context.setVariable("mostBoughtMovie", mostBoughtMovie);
 
         springTemplateEngine.process(
                 "listMovies.html",
@@ -55,7 +58,6 @@ public class MovieListServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("ticketOrder");
         req.setAttribute("ticket", ticket);
-        req.setAttribute("mostBoughtMovie", movieService.mostBoughtMovie());
 
         dispatcher.forward(req,resp);
     }

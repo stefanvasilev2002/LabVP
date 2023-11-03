@@ -49,10 +49,6 @@
 <form th:method="get" th:action="@{/}">
     <input type="submit" value="Back to home">
 </form>
-<div>
-    <h1>Most bought movie:</h1>
-    <p>Name: <span th:text="${mostBoughtMovie.getTitle()}"></span></p>
-    <p> Tickets Bought: <span th:text="${mostBoughtMovie.getTicketsBought()}"></span></p>
-</div>
+
 </body>
 </html>

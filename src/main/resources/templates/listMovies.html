@@ -15,6 +15,11 @@
     <h1>Welcome to our Movie Ticket Shop App</h1>
 </header>
 <main>
+    <div>
+        <h1>Most bought movie:</h1>
+        <p>Name: <span th:text="${mostBoughtMovie.getTitle()}"></span></p>
+        <p> Tickets Bought: <span th:text="${mostBoughtMovie.getTicketsBought()}"></span></p>
+    </div>
     <form th:method="post" th:action="@{/filter}">
         <h2>Choose filters:</h2>
         <label>Includes this text:</label>

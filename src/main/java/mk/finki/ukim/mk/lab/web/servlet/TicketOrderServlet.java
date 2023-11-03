@@ -29,10 +29,8 @@ public class TicketOrderServlet extends HttpServlet {
         WebContext context = new WebContext(webExchange);
 
         TicketOrder ticket = (TicketOrder) req.getAttribute("ticket");
-        Movie mostBoughtMovie = (Movie) req.getAttribute("mostBoughtMovie");
 
         context.setVariable("ticket", ticket);
-        context.setVariable("mostBoughtMovie", mostBoughtMovie);
 
         springTemplateEngine
                 .process("orderConfirmation.html",
