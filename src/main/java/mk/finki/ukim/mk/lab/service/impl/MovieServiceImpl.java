@@ -6,6 +6,7 @@ import mk.finki.ukim.mk.lab.repository.MovieRepository;
 import mk.finki.ukim.mk.lab.service.MovieService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -28,6 +29,21 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie mostBoughtMovie() {
         return movieRepository.mostBoughtMovie();
+    }
+
+    @Override
+    public void save(String title, String summary, double rating, Long productions, Long id) {
+        movieRepository.addMovie(title, summary, rating, productions, id);
+    }
+
+    @Override
+    public Optional<Movie> findById(Long id) {
+        return movieRepository.findAll().stream().filter(x->x.getId() == id).findFirst();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        movieRepository.deleteById(id);
     }
 
 }

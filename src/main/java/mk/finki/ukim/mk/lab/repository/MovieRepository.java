@@ -48,4 +48,22 @@ public class MovieRepository {
         }
         return movie;
     }
+
+    public void addMovie(String title, String summary, double rating, Long productions, Long id) {
+        if (DataHolder.movies.stream().anyMatch(x->x.getId() == id)){
+            Movie movie = DataHolder.movies.stream().filter(x->x.getId() == id).findFirst().get();
+            movie.setTitle(title);
+            movie.setRating(rating);
+            movie.setSummary(summary);
+        }
+        else {
+            Movie movie = new Movie(title, summary, rating, 0);
+            movie.setProduction(DataHolder.productions.stream().filter(x-> Objects.equals(x.getId(), productions)).findFirst().get());
+            DataHolder.movies.add(movie);
+        }
+    }
+
+    public void deleteById(Long id) {
+        DataHolder.movies.removeIf(x->x.getId() == id);
+    }
 }

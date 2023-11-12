@@ -32,13 +32,18 @@
     <form th:method="post" th:action="@{/}">
     <h2>Choose movie:</h2>
     <ul th:each="movie : ${movies}">
-        <input type="radio" name="radio" th:value="${movie.getTitle()}" th:text="'Title: '+ ${movie.getTitle()} + ', Summary: ' + ${movie.getSummary()} + ', Rating: ' +${movie.getRating()} ">
+        <input type="radio" name="radio" th:value="${movie.getTitle()}" th:text="'Title: '+ ${movie.getTitle()} + ', Summary: ' + ${movie.getSummary()} + ', Rating: ' +${movie.getRating()} + ', Production: ' +${movie.getProduction().getName()} ">
+        <a th:href="@{/movies/delete/{id} (id=${movie.getId()})}">Delete Movie</a>
+        <a th:href="@{/movies/edit/{id} (id=${movie.getId()})}">Edit Movie</a>
     </ul>
     <h2>Choose number of tickets:</h2>
     <input type="number" name="numTickets" min="1" max="10"><br/>
     <br/>
         <input type="submit" value="Submit" >
     </form>
+    <a th:href="@{/movies/add-form}">
+        <i>Add new movie</i>
+    </a>
 </main>
 </body>
 </html>

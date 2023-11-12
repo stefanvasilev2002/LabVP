@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.service.MovieService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -28,7 +29,8 @@ public class FilterServlet extends HttpServlet {
                 .buildApplication(getServletContext())
                 .buildExchange(req, resp);
         WebContext context = new WebContext(exchange);
-
+        Movie mostBoughtMovie =  movieService.mostBoughtMovie();
+        context.setVariable("mostBoughtMovie", mostBoughtMovie);
         context.setVariable("movies",
                 movieService.searchMovies(req.getParameter("textFilter"),
                         req.getParameter("ratingFilter")));
