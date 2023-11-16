@@ -20,7 +20,7 @@
         <p>Name: <span th:text="${mostBoughtMovie.getTitle()}"></span></p>
         <p> Tickets Bought: <span th:text="${mostBoughtMovie.getTicketsBought()}"></span></p>
     </div>
-    <form th:method="post" th:action="@{/filter}">
+    <form th:method="post" th:action="@{/movies/filter}">
         <h2>Choose filters:</h2>
         <label>Includes this text:</label>
         <input type="text" name="textFilter">
@@ -29,21 +29,22 @@
         <input type="submit" value="Submit" >
     </form>
 
-    <form th:method="post" th:action="@{/}">
+    <form th:method="post" th:action="@{/ticketOrder}">
     <h2>Choose movie:</h2>
     <ul th:each="movie : ${movies}">
-        <input type="radio" name="radio" th:value="${movie.getTitle()}" th:text="'Title: '+ ${movie.getTitle()} + ', Summary: ' + ${movie.getSummary()} + ', Rating: ' +${movie.getRating()} + ', Production: ' +${movie.getProduction().getName()} ">
+        <input type="radio" name="movieName" th:value="${movie.getTitle()}" th:text="'Title: '+ ${movie.getTitle()} + ', Summary: ' + ${movie.getSummary()} + ', Rating: ' +${movie.getRating()} + ', Production: ' +${movie.getProduction().getName()} ">
         <a th:href="@{/movies/delete/{id} (id=${movie.getId()})}">Delete Movie</a>
         <a th:href="@{/movies/edit/{id} (id=${movie.getId()})}">Edit Movie</a>
     </ul>
+        <a th:href="@{/movies/add-form}">
+            <h3>Add new movie</h3>
+        </a>
     <h2>Choose number of tickets:</h2>
     <input type="number" name="numTickets" min="1" max="10"><br/>
     <br/>
         <input type="submit" value="Submit" >
     </form>
-    <a th:href="@{/movies/add-form}">
-        <i>Add new movie</i>
-    </a>
+
 </main>
 </body>
 </html>

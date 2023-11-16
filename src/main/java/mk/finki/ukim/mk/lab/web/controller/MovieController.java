@@ -26,11 +26,10 @@ public class MovieController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-
         model.addAttribute("movies", movieService.listAll());
         Movie mostBoughtMovie =  movieService.mostBoughtMovie();
         model.addAttribute("mostBoughtMovie", mostBoughtMovie);
-        return "listMovies.html";
+        return "listMovies";
     }
 
     @PostMapping("/add")
@@ -66,5 +65,15 @@ public class MovieController {
     public String deleteMovie(@PathVariable Long id) {
         this.movieService.deleteById(id);
         return "redirect:/movies";
+    }
+    @PostMapping("/filter")
+    public String filterMovies(@RequestParam String textFilter,
+                               @RequestParam double ratingFilter,
+                               Model model){
+        Movie mostBoughtMovie =  movieService.mostBoughtMovie();
+        model.addAttribute("mostBoughtMovie", mostBoughtMovie);
+        model.addAttribute("movies",
+                movieService.searchMovies(textFilter, String.valueOf(ratingFilter)));
+        return "listMovies";
     }
 }

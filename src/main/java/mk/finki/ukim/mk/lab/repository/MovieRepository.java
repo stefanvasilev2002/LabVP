@@ -4,6 +4,7 @@ import mk.finki.ukim.mk.lab.bootstrap.DataHolder;
 import mk.finki.ukim.mk.lab.model.Movie;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 @Repository
 public class MovieRepository {
     public List<Movie> findAll(){
-        return DataHolder.movies;
+        return DataHolder.movies.isEmpty() ? new ArrayList<>() : DataHolder.movies;
     }
     public List<Movie> searchMovies(String text, String rating){
         if (Objects.equals(text, "") && Objects.equals(rating, "")){
@@ -41,8 +42,8 @@ public class MovieRepository {
         }
     }
     public Movie mostBoughtMovie(){
-        Movie movie =  DataHolder.movies
-                .stream().max(Comparator.comparing(Movie::getTicketsBought)).get();
+        Movie movie = !DataHolder.movies.isEmpty() ? DataHolder.movies
+                .stream().max(Comparator.comparing(Movie::getTicketsBought)).get() : new Movie("","",0, 0);
         if (movie.getTicketsBought() == 0){
             return new Movie("No movies bought", "", 0, 0);
         }
