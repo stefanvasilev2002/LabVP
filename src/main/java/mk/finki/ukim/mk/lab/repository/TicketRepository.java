@@ -5,6 +5,8 @@ import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.TicketOrder;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class TicketRepository {
     public TicketOrder addTicket(TicketOrder ticketOrder){
@@ -16,4 +18,7 @@ public class TicketRepository {
         return ticketOrder;
     }
 
+    public List<TicketOrder> getOrders() {
+        return DataHolder.tickets;
+    }
 }

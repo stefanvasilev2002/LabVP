@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.repository;
 
 import mk.finki.ukim.mk.lab.bootstrap.DataHolder;
 import mk.finki.ukim.mk.lab.model.Movie;
+import mk.finki.ukim.mk.lab.model.TicketOrder;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -66,5 +67,15 @@ public class MovieRepository {
 
     public void deleteById(Long id) {
         DataHolder.movies.removeIf(x->x.getId() == id);
+    }
+    public Movie findById(Long id) {
+        return DataHolder.movies.stream().filter(x->x.getId() == id).findFirst().get();
+    }
+
+
+    public void editTicketRatings() {
+        for(TicketOrder order : DataHolder.tickets){
+            order.setRating((float) findById(order.getMovieId()).getRating());
+        }
     }
 }

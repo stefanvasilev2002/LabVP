@@ -32,7 +32,7 @@
     <form th:method="post" th:action="@{/ticketOrder}">
     <h2>Choose movie:</h2>
     <ul th:each="movie : ${movies}">
-        <input type="radio" name="movieName" th:value="${movie.getTitle()}" th:text="'Title: '+ ${movie.getTitle()} + ', Summary: ' + ${movie.getSummary()} + ', Rating: ' +${movie.getRating()} + ', Production: ' +${movie.getProduction().getName()} ">
+        <input type="radio" name="movieId" th:value="${movie.getId()}" th:text="'Title: '+ ${movie.getTitle()} + ', Summary: ' + ${movie.getSummary()} + ', Rating: ' +${movie.getRating()} + ', Production: ' +${movie.getProduction().getName()} ">
         <a th:href="@{/movies/delete/{id} (id=${movie.getId()})}">Delete Movie</a>
         <a th:href="@{/movies/edit/{id} (id=${movie.getId()})}">Edit Movie</a>
     </ul>

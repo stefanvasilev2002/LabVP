@@ -10,4 +10,6 @@ public class TicketOrder {
     String clientName;
     String clientAddress;
     Long numberOfTickets;
+    Long movieId;
+    float rating;
 }

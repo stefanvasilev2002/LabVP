@@ -46,4 +46,9 @@ public class MovieServiceImpl implements MovieService {
         movieRepository.deleteById(id);
     }
 
+    @Override
+    public void editTicketRating() {
+        movieRepository.editTicketRatings();
+    }
+
 }

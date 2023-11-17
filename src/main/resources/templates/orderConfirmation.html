@@ -49,6 +49,15 @@
 <form th:method="get" th:action="@{/movies}">
     <input type="submit" value="Back to home">
 </form>
-
+<div>
+    <h2>Choose movie:</h2>
+    <ul th:each="order : ${orders}">
+        <p th:value="${order.getMovieTitle()}" th:text="'Title: '+ ${order.getMovieTitle()} + ', Rating: ' +${order.getRating()}+ ', Tickets Bought: ' +${order.getNumberOfTickets()}"></p>
+        <form th:method="post" th:action="@{/movies/editRating/{id} (id=${order.getMovieId()})}">
+            <input type="number" name="newRating" min="0.0" max="5.0" step="0.1">
+            <button type="submit">Edit Rating</button>
+        </form>
+    </ul>
+</div>
 </body>
 </html>

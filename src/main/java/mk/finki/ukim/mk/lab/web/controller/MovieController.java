@@ -3,6 +3,7 @@ import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.Production;
 import mk.finki.ukim.mk.lab.service.MovieService;
 import mk.finki.ukim.mk.lab.service.ProductionService;
+import mk.finki.ukim.mk.lab.service.TicketOrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +15,12 @@ import java.util.List;
 public class MovieController {
     private final MovieService movieService;
     private final ProductionService productionService;
+    private final TicketOrderService ticketOrderService;
 
-    public MovieController(MovieService movieService, ProductionService productionService) {
+    public MovieController(MovieService movieService, ProductionService productionService, TicketOrderService ticketOrderService) {
         this.movieService = movieService;
         this.productionService = productionService;
+        this.ticketOrderService = ticketOrderService;
     }
 
     @GetMapping
@@ -74,6 +77,18 @@ public class MovieController {
         model.addAttribute("mostBoughtMovie", mostBoughtMovie);
         model.addAttribute("movies",
                 movieService.searchMovies(textFilter, String.valueOf(ratingFilter)));
+        return "listMovies";
+    }
+    @PostMapping("/editRating/{id}")
+    public String editRating(@PathVariable Long id, @RequestParam double newRating, Model model){
+        Movie movie = movieService.findById(id).get();
+        movie.setRating((movie.getRating() + newRating) / 2);
+        movieService.editTicketRating();
+        Movie mostBoughtMovie =  movieService.mostBoughtMovie();
+        model.addAttribute("mostBoughtMovie", mostBoughtMovie);
+        model.addAttribute("movies",
+                movieService.searchMovies("", ""));
+
         return "listMovies";
     }
 }

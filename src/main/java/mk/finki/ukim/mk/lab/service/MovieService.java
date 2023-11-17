@@ -14,4 +14,6 @@ public interface MovieService {
     Optional<Movie> findById(Long id);
 
     void deleteById(Long id);
+
+    void editTicketRating();
 }
