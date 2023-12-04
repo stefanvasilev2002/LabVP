@@ -16,4 +16,6 @@ public interface MovieService {
     void deleteById(Long id);
 
     void editTicketRating();
+
+    void saveNewMovie(String title, String summary, double rating, Long productions, Long id);
 }

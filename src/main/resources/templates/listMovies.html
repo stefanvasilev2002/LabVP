@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title>Movie Ticket Order page - Welcome and choose a Movie</title>
@@ -16,16 +16,20 @@
 </header>
 <main>
     <div>
-        <h1>Most bought movie:</h1>
-        <p>Name: <span th:text="${mostBoughtMovie.getTitle()}"></span></p>
+        <h1>
+
+        </h1>
+        <p><th:block th:if="${mostBoughtMovie.getTicketsBought() == 0}">No movies bought</th:block>
+            <th:block th:if="${mostBoughtMovie.getTicketsBought() != 0}"><span th:text="${mostBoughtMovie.getTitle()}"></span></th:block>
+        </p>
         <p> Tickets Bought: <span th:text="${mostBoughtMovie.getTicketsBought()}"></span></p>
     </div>
     <form th:method="post" th:action="@{/movies/filter}">
         <h2>Choose filters:</h2>
         <label>Includes this text:</label>
-        <input type="text" name="textFilter">
+        <input type="text" name="textFilter" value="">
         <label>Rating of at least:</label>
-        <input type="number" name="ratingFilter" min="0.0" max="5.0" step="0.1">
+        <input type="number" name="ratingFilter" min="0.0" max="5.0" step="0.1" value="0">
         <input type="submit" value="Submit" >
     </form>
 
@@ -42,6 +46,8 @@
     <h2>Choose number of tickets:</h2>
     <input type="number" name="numTickets" min="1" max="10"><br/>
     <br/>
+        <h3>Choose date of creation:</h3>
+        <input type="datetime-local" name="dateCreated", value="2023-12-23 11:56:00">
         <input type="submit" value="Submit" >
     </form>
 

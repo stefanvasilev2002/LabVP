@@ -1,4 +1,5 @@
 package mk.finki.ukim.mk.lab.web.controller;
+import mk.finki.ukim.mk.lab.model.AppUser;
 import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.Production;
 import mk.finki.ukim.mk.lab.service.MovieService;
@@ -43,7 +44,7 @@ public class MovieController {
         @RequestParam Long productions,
         @RequestParam Long id) {
 
-            this.movieService.save(title, summary, rating, productions, id);
+            this.movieService.saveNewMovie(title, summary, rating, productions, id);
             return "redirect:/movies";
     }
     @GetMapping("/add-form")
@@ -87,7 +88,7 @@ public class MovieController {
         Movie mostBoughtMovie =  movieService.mostBoughtMovie();
         model.addAttribute("mostBoughtMovie", mostBoughtMovie);
         model.addAttribute("movies",
-                movieService.searchMovies("", ""));
+                movieService.searchMovies("", "0"));
 
         return "listMovies";
     }

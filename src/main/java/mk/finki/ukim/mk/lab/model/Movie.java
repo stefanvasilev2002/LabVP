@@ -1,16 +1,22 @@
 package mk.finki.ukim.mk.lab.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.util.Random;
 
 @Data
+@Entity
 public class Movie {
+    @Id
+    long id;
     String title;
     String summary;
     double rating;
     int ticketsBought;
-    long id;
+    @ManyToOne
     Production production;
     public Movie(String title, String summary, double rating, int ticketsBought) {
         this.title = title;
@@ -20,4 +26,9 @@ public class Movie {
         Random random = new Random();
         this.id = random.nextLong();
     }
+
+    public Movie() {
+
+    }
+
 }

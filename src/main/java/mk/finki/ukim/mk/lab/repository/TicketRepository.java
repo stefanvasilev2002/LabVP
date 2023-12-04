@@ -1,24 +1,14 @@
 package mk.finki.ukim.mk.lab.repository;
 
-import mk.finki.ukim.mk.lab.bootstrap.DataHolder;
-import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.TicketOrder;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public class TicketRepository {
-    public TicketOrder addTicket(TicketOrder ticketOrder){
-        DataHolder.tickets.add(ticketOrder);
-        Movie movie = DataHolder.movies
-                .stream().filter(x->x.getTitle().equals(ticketOrder.getMovieTitle()))
-                .findFirst().get();
-        movie.setTicketsBought((int) (movie.getTicketsBought() + ticketOrder.getNumberOfTickets()));
-        return ticketOrder;
-    }
-
-    public List<TicketOrder> getOrders() {
-        return DataHolder.tickets;
-    }
+public interface TicketRepository extends JpaRepository<TicketOrder, Long> {
+    public List<TicketOrder> findAll();
+    public List<TicketOrder> findByDateCreatedBetween(LocalDateTime from, LocalDateTime to);
 }

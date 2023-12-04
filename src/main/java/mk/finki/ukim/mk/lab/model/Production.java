@@ -1,12 +1,16 @@
 package mk.finki.ukim.mk.lab.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Random;
 
 @Data
+@Entity
 public class Production {
+    @Id
     private Long id;
     private String name;
     private String country;
@@ -18,5 +22,9 @@ public class Production {
         this.address = address;
         Random random = new Random();
         this.id = random.nextLong();
+    }
+
+    public Production() {
+
     }
 }

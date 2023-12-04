@@ -1,15 +1,14 @@
 package mk.finki.ukim.mk.lab.repository;
 
-import lombok.Data;
-import mk.finki.ukim.mk.lab.bootstrap.DataHolder;
 import mk.finki.ukim.mk.lab.model.Production;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class ProductionRepository {
-    public List<Production> findAll(){
-        return DataHolder.productions;
-    }
+public interface ProductionRepository extends JpaRepository<Production, Long> {
+    public List<Production> findAll();
+    Production findProductionById(Long id);
 }
